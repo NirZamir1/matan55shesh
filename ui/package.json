@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "env:encrypt": "python ../dev/scripts/env_encrypt.py",
+    "env:decrypt": "python ../dev/scripts/env_decrypt.py"
   },
   "dependencies": {
     "react": "^19.0.0",
