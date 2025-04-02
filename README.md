@@ -20,14 +20,6 @@ Make sure you have the following installed on your machine:
 - npm or yarn
 
 ### Getting Started
-
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/your-username/quickstart.git
-    cd quickstart
-    ```
-
 2. Install dependencies for both the UI and server:
 
     ```bash
