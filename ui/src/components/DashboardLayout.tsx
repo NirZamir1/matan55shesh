@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import React from "react";
 const sidebarWidth = 10;
 const topBarHeight = 10;
@@ -32,6 +32,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
 
       <Box ml={sidebarWidth} mt={topBarHeight}>
         {children}
+        <Button>NIRR</Button>
       </Box>
     </>
   );
