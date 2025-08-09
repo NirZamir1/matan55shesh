@@ -1,8 +1,19 @@
+import { GetFetcher } from "@/utils/fetchers";
 import { Text } from "@chakra-ui/react";
+import useSWR from "swr";
 export default function Home() {
+  const { data: envelope, isValidating } = useSWR<{
+    message: string;
+  }>("/api/hello", GetFetcher);
   return (
     <>
-      <Text>Hello Matan!</Text>
+      {isValidating ? (
+        <Text>Loading...</Text>
+      ) : (
+        <Text fontSize="xl" color="blue.500">
+          {envelope?.message}
+        </Text>
+      )}
     </>
   );
 }
