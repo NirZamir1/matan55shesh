@@ -14,9 +14,65 @@ datasource db {
   url      = env("POSTGRES_URL")
 }
 
-model Eample {
-  id        Int      @id @default(autoincrement())
-  name      String
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+model Soldier {
+  id         String       @id @unique
+  name       String
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  membership Membership[]
+  Assignment Assignment[]
+  Vacation   Vacation[]
+}
+
+model Unit {
+  id          String       @id @unique
+  name        String
+  memberships Membership[]
+}
+
+model Membership {
+  id        String  @id
+  soldierId String
+  unitId    String
+  role      Role
+  soldier   Soldier @relation(fields: [soldierId], references: [id])
+  unit      Unit    @relation(fields: [unitId], references: [id])
+}
+
+model Position {
+  id               String       @id @default(uuid())
+  name             String
+  createdAt        DateTime     @default(now())
+  numberOfSoldiers Int
+  updatedAt        DateTime     @updatedAt
+  Assignment       Assignment[]
+}
+
+model Assignment {
+  id         String   @id @default(uuid())
+  positionId String
+  unitId     String
+  soldierId  String
+  startDate  DateTime @default(now())
+  endDate    DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  position   Position @relation(fields: [positionId], references: [id])
+  soldier    Soldier  @relation(fields: [soldierId], references: [id])
+}
+
+model Vacation {
+  id        String   @id @default(uuid())
+  soldierId String
+  startDate DateTime @default(now())
+  endDate   DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  soldier   Soldier  @relation(fields: [soldierId], references: [id])
 }
